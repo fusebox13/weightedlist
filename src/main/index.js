@@ -19,6 +19,7 @@ function createWindow () {
    */
   mainWindow = new BrowserWindow({
     title: "Impact Calculator",
+    resizable: false,
     height: 563,
     useContentSize: true,
     width: 400
