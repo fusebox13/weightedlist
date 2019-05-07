@@ -1,4 +1,4 @@
-import { app, BrowserWindow } from 'electron'
+import { app, Menu, Tray, BrowserWindow } from 'electron'
 
 /**
  * Set `__static` path to static files in production
@@ -9,11 +9,12 @@ if (process.env.NODE_ENV !== 'development') {
 }
 
 let mainWindow
+let tray
 const winURL = process.env.NODE_ENV === 'development'
   ? `http://localhost:9080`
   : `file://${__dirname}/index.html`
 
-function createWindow () {
+function createWindow (event) {
   /**
    * Initial window options
    */
@@ -25,9 +26,20 @@ function createWindow () {
     width: 400
   })
 
+  tray = new Tray(__static + '/fcs.png');
+  const contextMenu = Menu.buildFromTemplate([
+    { label: 'Item1', type: 'normal', click: function() {
+      mainWindow.webContents.send('pong', Math.random())
+    }},
+    { label: 'Item2', type: 'normal' },
+    { label: 'Item3', type: 'normal', checked: true },
+    { label: 'Item4', type: 'normal' }
+  ])
+  tray.setToolTip('This is my application.')
+  tray.setContextMenu(contextMenu)
+
   mainWindow.loadURL(winURL)
   mainWindow.setMenu(null);
-
   mainWindow.on('closed', () => {
     mainWindow = null
   })

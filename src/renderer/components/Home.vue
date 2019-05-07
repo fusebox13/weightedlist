@@ -14,6 +14,12 @@ import WeightedList from "@/components/WeightedList"
       open (link) {
         this.$electron.shell.openExternal(link)
       }
+    },
+    mounted() {
+      this.$electron.ipcRenderer.on('pong', (event, data) => {
+        this.myDataVar = data
+        console.log(data)
+      })
     }
   }
 </script>
