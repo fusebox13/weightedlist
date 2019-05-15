@@ -6,7 +6,17 @@
 
 <script>
   export default {
-    name: 'weightlist'
+    name: 'weightlist',
+    methods: {
+      registerTrayListener() {
+        this.$electron.ipcRenderer.on('tray-menu-item-clicked', (event, view) => {
+        this.$router.push(view)
+      })
+      }
+    },
+    created() {
+      this.registerTrayListener()
+    }
   }
 </script>
 

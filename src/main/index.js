@@ -26,17 +26,26 @@ function createWindow (event) {
     width: 400
   })
 
-  tray = new Tray(__static + '/fcs.png');
+  tray = new Tray(__static + '/fcs.ico');
   const contextMenu = Menu.buildFromTemplate([
-    { label: 'Item1', type: 'normal', click: function() {
-      mainWindow.webContents.send('pong', Math.random())
-    }},
-    { label: 'Item2', type: 'normal' },
-    { label: 'Item3', type: 'normal', checked: true },
-    { label: 'Item4', type: 'normal' }
+    { label: 'Impact Calculator', type: 'normal', click: function() {
+        mainWindow.webContents.send('tray-menu-item-clicked', 'home')
+        mainWindow.focus()
+      }
+    },
+    { label: 'Away', type: 'normal', click: function() {
+        mainWindow.webContents.send('tray-menu-item-clicked', 'away')
+        mainWindow.focus()
+      } 
+    }
   ])
-  tray.setToolTip('This is my application.')
+  tray.setToolTip('FCS Toolbox')
   tray.setContextMenu(contextMenu)
+
+
+  tray.on('click', function() {
+    mainWindow.focus()
+  });
 
   mainWindow.loadURL(winURL)
   mainWindow.setMenu(null);

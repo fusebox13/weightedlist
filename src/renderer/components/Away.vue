@@ -1,20 +1,12 @@
 <template>
-  <div id="home">
-    <weighted-list/>
+  <div id="away">
+    away
   </div>
 </template>
 
 <script>
-import WeightedList from "@/components/WeightedList"
-
   export default {
-    name: 'home',
-    components: { WeightedList },
-    methods: {
-      open (link) {
-        this.$electron.shell.openExternal(link)
-      }
-    }
+    name: 'away'
   }
 </script>
 
