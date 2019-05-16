@@ -1,14 +1,15 @@
 <template>
   <label :for="uuid">
-    <select v-model="answerIndex">
-      <option value="-1" disabled selected>{{question.label}}</option>
+    {{question.label}}
+    <radiogroup>
       <Answer 
         v-for="(answer, key) in question.answers" 
         :answer="answer"
         :key="key"
         :value="key"
+        :question-index="index"
       ></Answer>
-    </select>
+    </radiogroup>
   </label>
 </template>
 
@@ -66,9 +67,12 @@ import Answer from "@/components/Answer"
 
 <style lang="scss">
   label {
-    font-weight: 800;
+    font-weight: 400;
     margin-bottom: 1em;
-    select { 
+    font-size: 1em;
+    radiogroup { 
+      font-size: 1em; 
+      margin-top: 1em;
       display: block;
       padding: 0.5em;
       width: 100%;

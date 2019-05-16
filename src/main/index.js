@@ -20,11 +20,12 @@ function createWindow (event) {
    */
   mainWindow = new BrowserWindow({
     title: "Impact Calculator",
-    resizable: false,
+    // resizable: false,
     height: 563,
     useContentSize: true,
     width: 400
   })
+
 
   tray = new Tray(__static + '/fcs.ico');
   const contextMenu = Menu.buildFromTemplate([
